@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestNewSemaphore(t *testing.T) {
+func TestSemaphore_NewSemaphore(t *testing.T) {
 	t.Run("valid count", func(t *testing.T) {
 		sem, err := NewSemaphore(5)
 		require.NoError(t, err)
@@ -34,7 +34,7 @@ func TestNewSemaphore(t *testing.T) {
 	})
 }
 
-func TestAcquire(t *testing.T) {
+func TestSemaphore_Acquire(t *testing.T) {
 	t.Run("successful acquire", func(t *testing.T) {
 		sem, err := NewSemaphore(2)
 		require.NoError(t, err)
@@ -113,7 +113,7 @@ func TestAcquire(t *testing.T) {
 	})
 }
 
-func TestTryAcquire(t *testing.T) {
+func TestSemaphore_TryAcquire(t *testing.T) {
 	t.Run("non-blocking success", func(t *testing.T) {
 		sem, err := NewSemaphore(2)
 		require.NoError(t, err)
@@ -163,7 +163,7 @@ func TestTryAcquire(t *testing.T) {
 	})
 }
 
-func TestAcquireWithTimeout(t *testing.T) {
+func TestSemaphore_AcquireWithTimeout(t *testing.T) {
 	t.Run("timeout success", func(t *testing.T) {
 		sem, err := NewSemaphore(2)
 		require.NoError(t, err)
@@ -213,7 +213,7 @@ func TestAcquireWithTimeout(t *testing.T) {
 	})
 }
 
-func TestRelease(t *testing.T) {
+func TestSemaphore_Release(t *testing.T) {
 	t.Run("successful release", func(t *testing.T) {
 		sem, err := NewSemaphore(2)
 		require.NoError(t, err)
@@ -264,7 +264,7 @@ func TestRelease(t *testing.T) {
 	})
 }
 
-func TestAvailable(t *testing.T) {
+func TestSemaphore_Available(t *testing.T) {
 	sem, err := NewSemaphore(5)
 	require.NoError(t, err)
 
@@ -283,7 +283,7 @@ func TestAvailable(t *testing.T) {
 	assert.Equal(t, 4, sem.Available())
 }
 
-func TestCapacity(t *testing.T) {
+func TestSemaphore_Capacity(t *testing.T) {
 	sem, err := NewSemaphore(7)
 	require.NoError(t, err)
 
@@ -299,7 +299,7 @@ func TestCapacity(t *testing.T) {
 	assert.Equal(t, 7, sem.Capacity())
 }
 
-func TestConcurrentOperations(t *testing.T) {
+func TestSemaphore_ConcurrentOperations(t *testing.T) {
 	sem, err := NewSemaphore(5)
 	require.NoError(t, err)
 
@@ -328,7 +328,7 @@ func TestConcurrentOperations(t *testing.T) {
 	assert.Equal(t, 5, sem.Available())
 }
 
-func TestConcurrentTryAcquire(t *testing.T) {
+func TestSemaphore_ConcurrentTryAcquire(t *testing.T) {
 	sem, err := NewSemaphore(3)
 	require.NoError(t, err)
 
@@ -366,7 +366,7 @@ func TestConcurrentTryAcquire(t *testing.T) {
 	assert.Equal(t, 20, count)
 }
 
-func TestAcquireReleasePattern(t *testing.T) {
+func TestSemaphore_AcquireReleasePattern(t *testing.T) {
 	sem, err := NewSemaphore(2)
 	require.NoError(t, err)
 
@@ -382,7 +382,7 @@ func TestAcquireReleasePattern(t *testing.T) {
 	}
 }
 
-func TestMultipleAcquiresBeforeRelease(t *testing.T) {
+func TestSemaphore_MultipleAcquiresBeforeRelease(t *testing.T) {
 	sem, err := NewSemaphore(3)
 	require.NoError(t, err)
 
